@@ -16,9 +16,9 @@ class Query extends MainConnect
 
 	const CONNECTION_TYPE = "tcp://";
 
-	public function __construct($ip, $port)
+	public function __construct($ip, $port, $timeout = 2)
 	{
-		parent::__construct($ip, $port, 2, [
+		parent::__construct($ip, $port, $timeout, [
 			'connection_type' => self::CONNECTION_TYPE
 		]);
 
@@ -74,7 +74,7 @@ class Query extends MainConnect
 
 	protected function connect()
 	{
-		$this->socket = @fsockopen($this->option('connection_type') . $this->ip, $this->port, $errno, $errstr, $this->timeout);
+		$this->socket = @fsockopen($this->config('connection_type') . $this->ip, $this->port, $errno, $errstr, $this->timeout);
 
 		@stream_set_timeout($this->socket, $this->timeout);
 

@@ -17,13 +17,13 @@ use Weblebby\GameConnect\MainConnect;
 
 class Rcon extends MainConnect
 {
+	public $response;
+	public $authorized;
+
 	protected $password;
 
-	public $authorized;
-	public $response;
-
-	const PACKET_AUTHORIZE = 5;
 	const PACKET_COMMAND = 6;
+	const PACKET_AUTHORIZE = 5;
 
 	const SERVERDATA_AUTH = 3;
 	const SERVERDATA_AUTH_RESPONSE = 2;
@@ -38,9 +38,9 @@ class Rcon extends MainConnect
 	 * @param string $password
 	 * @param integer $timeout
 	 */
-	public function __construct($host, $port, $password, $timeout = 2) 
+	public function __construct($ip, $port, $password, $timeout = 2) 
 	{
-		parent::__construct($host, $port, $timeout);
+		parent::__construct($ip, $port, $timeout);
 
 		$this->password = $password;
 
@@ -54,10 +54,10 @@ class Rcon extends MainConnect
 	 */
 	protected function connect() 
 	{
-		$this->socket = @fsockopen($this->host, $this->port, $errno, $errstr, $this->timeout);
+		$this->socket = @fsockopen($this->ip, $this->port, $errno, $errstr, $this->timeout);
 
-		if (!$this->socket) {
-			$this->respnose = $errstr;
+		if ( !$this->socket ) {
+			$this->response = $errstr;
 			return false;
 		}
 
@@ -101,6 +101,11 @@ class Rcon extends MainConnect
 		return false;
 	}
 
+	/**
+	 * List online players.
+	 *
+	 * @return array
+	 */
 	public function listPlayers()
 	{
 		$this->sendCommand('list');
