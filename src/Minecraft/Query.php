@@ -1,6 +1,6 @@
 <?php
 
-namespace Weblebby\GameQuery\Minecraft;
+namespace Weblebby\GameConnect\Minecraft;
 
 use Weblebby\GameConnect\MainConnect;
 
