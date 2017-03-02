@@ -1,0 +1,19 @@
+{
+    "name": "weblebby/game-connect",
+    "description": "Query, Rcon & Helpers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davut Kember",
+            "email": "davutkmbr@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Weblebby\\GameConnect\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
